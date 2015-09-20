@@ -1,4 +1,4 @@
-package main;
+package dungeon;
 
 public class NormalRoom extends Room {
 
