@@ -1,13 +1,13 @@
-package main;
+package dungeon;
 
 
-public class Stair {
+public class Floor {
 	
 	private Room entrance;
 	private boolean exitExist = false;
 	private int number;
 	
-	public Stair() {
-		entrance = new Room(number);
+	public Floor() {
+		//entrance = new Room(number);
 	}
 }

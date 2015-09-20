@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class Room {
 
-	private Map<String,Room> neighbors;	
+	protected Map<String,Room> neighbors;	
 	
 	public Room() {
 		this.neighbors = new HashMap<String,Room>();
@@ -26,7 +26,7 @@ public abstract class Room {
 	 * @return the room with its direction
 	 * @exception 
 	 */
-	public Room getNeigbor(String direction) throws NullPointerException {
+	public Room getNeighbor(String direction) throws NullPointerException {
 		if (this.neighbors.containsKey(direction)) {
 			return this.neighbors.get(direction);
 		}
@@ -34,6 +34,15 @@ public abstract class Room {
 			throw new NullPointerException();
 		}
 	}
+	
+	/**
+	 * give all neighbors associated to this room
+	 * @return room's neighbors
+	 */
+	public Map<String,Room> getNeighbors() {
+		return this.neighbors;
+	}
+	
 	/**
 	 * tells if a player can leaves the room
 	 * @return <tt>true</tt> if and only if the player in this room can freely

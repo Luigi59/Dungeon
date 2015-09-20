@@ -13,11 +13,11 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 		System.out.println(p1.getHealthPoints());
-		*/
+		
 		Position p = new Position(1,1);
 		Room r2 = new TrapRoom(p);
 		
 		System.out.println(r2.canBeLeft());
-		System.out.println(r2.getDescription());
+		System.out.println(r2.getDescription());*/
 	}
 }

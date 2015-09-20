@@ -16,7 +16,7 @@ public abstract class Dungeon {
 	
 	public void interpretCommand(String command) {
 		Room currentRoom = this.player.getRoom();
-		Room newRoom = currentRoom.getNeigbor(command);
+		Room newRoom = currentRoom.getNeighbor(command);
 		switch(command) {
 		case "go north" :
 			this.player.setRoom(newRoom);
