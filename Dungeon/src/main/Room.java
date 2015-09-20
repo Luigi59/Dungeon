@@ -3,41 +3,50 @@ package main;
 import java.util.HashMap;
 import java.util.Map;
 
+import dungeon.Room;
+
 
 public abstract class Room {
 
-	private Map<String,Room> neighbors;
+	private Map<String,Room> neighbors;	
 	
-	private Stair stair;
+	public Room() {
+		this.neighbors = new HashMap<String,Room>();
+	}
 	
+	/**
+	 * add a adjacent room to the room depending of the desired direction
+	 * @param direction the desired direction
+	 * @param name the name of the room added
+	 */
+	public void addNeighbor(String direction,Room name) {
+		this.neighbors.put(direction, name);
+	}
+	
+	/**
+	 * gives the room with its associated direction
+	 * @param direction 
+	 * @return the room with its direction
+	 * @exception 
+	 */
+	public Room getNeigbor(String direction) throws NullPointerException {
+		if (this.neighbors.containsKey(direction)) {
+			return this.neighbors.get(direction);
+		}
+		else {
+			throw new NullPointerException();
+		}
+	}
+	/**
+	 * tells if a player can leaves the room
+	 * @return <tt>true</tt> if and only if the player in this room can freely
+	 *  leaves the room
+	 */
 	public abstract boolean canBeLeft();
 	
+	/**
+	 * gives the type of the room
+	 * @return the description of the room
+	 */
 	public abstract String getDescription();
-	
-	public Room(Stair stair) {
-		this.stair = stair;
-		generateNeighbors();
-	}
-	
-	public Map<String,Room> generateNeighbors() {
-		neighbors = new HashMap<String,Room>();
-		neighbors.put("north",randomRoom());
-		neighbors.put("south",randomRoom());
-		neighbors.put("east",randomRoom());
-		neighbors.put("west",randomRoom());
-		return neighbors;
-	}
-	
-	public Room randomRoom() {
-		
-		double r = Math.random()*10;
-		if (r<1)
-			return new ExitRoom();
-		else if (r<2) 
-			return new TrapRoom();
-		else if (r<4)
-			return null;
-		else
-			return new NormalRoom();	
-	}
 }
