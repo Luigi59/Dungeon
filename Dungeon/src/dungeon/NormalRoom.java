@@ -13,6 +13,6 @@ public class NormalRoom extends Room {
 	
 	@Override
 	public String getDescription() {
-		return " It's an intersection.";
+		return "It's an intersection.";
 	}
 }

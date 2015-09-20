@@ -75,5 +75,12 @@ public class RoomTest {
 		assertEquals(entranceNeighbors, entrance.getNeighbors());
 		assertEquals(trapNeighbors, trap.getNeighbors());
 	}
+	
+	@Test
+	public void testGetDescription() {
+		assertEquals("It's an intersection.", normalRoom.getDescription());
+		assertEquals("This is the exit!", exitRoom.getDescription());
+		assertEquals("It's a trap!", trapRoom.getDescription());
+	}
 
 }

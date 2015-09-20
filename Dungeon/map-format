@@ -1,0 +1,20 @@
+Les fichiers textes dungeon sont écrits de la manière suivante :
+
+le nom du fichier commencera par "dungeon " suivi du numéro du donjon et de l'étage (séparés par un tiret)
+
+Sur chaque ligne on indiquera le numéro de la Room, son type, la direction, le numéro de la room destination, le type de la room destination (séparés par des espaces)
+
+Exemple de fichier :
+
+
+1 normal west 2 trap
+1 normal north 3 exit
+2 trap east 1 normal
+3 exit south 1 normal
+
+cet exemple donnera la map suivante :
+
+
+			exit
+			
+	trap	normal
