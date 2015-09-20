@@ -3,9 +3,6 @@ package dungeon;
 import java.util.HashMap;
 import java.util.Map;
 
-import dungeon.Room;
-
-
 public abstract class Room {
 
 	private Map<String,Room> neighbors;	
