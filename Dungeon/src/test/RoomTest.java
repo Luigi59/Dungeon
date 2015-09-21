@@ -82,5 +82,7 @@ public class RoomTest {
 		assertEquals("This is the exit!", exitRoom.getDescription());
 		assertEquals("It's a trap!", trapRoom.getDescription());
 	}
+	
+	//test
 
 }
