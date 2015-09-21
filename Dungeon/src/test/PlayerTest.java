@@ -53,6 +53,6 @@ public class PlayerTest {
 		assertEquals("Your name is : Estelle\nNumber of health points : 10",p1.toString());
 	}
 
-	//test
+	// test
 	
 }

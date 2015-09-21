@@ -83,6 +83,6 @@ public class RoomTest {
 		assertEquals("It's a trap!", trapRoom.getDescription());
 	}
 	
-	//test
+	// test
 
 }
