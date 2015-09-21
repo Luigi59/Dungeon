@@ -2,17 +2,19 @@ package dungeon;
 
 import java.util.Scanner;
 
-public abstract class Dungeon {
+public class Dungeon {
 
 	private Player player;
 	
 	protected final Scanner scanner = new Scanner(System.in);
 	
-	public Dungeon() {
+	public Dungeon(int n) {
 		
 	}
 	
-	public abstract void initializeDungeon();
+	public void initializeDungeon() {
+		
+	}
 	
 	public void interpretCommand(String command) {
 		Room currentRoom = this.player.getRoom();
