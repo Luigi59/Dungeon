@@ -19,9 +19,7 @@ public class Main {
 		
 		System.out.println(r2.canBeLeft());
 		System.out.println(r2.getDescription());*/
+		new Dungeon(1);
 	}
 	
-	public void playDungeon(int n) {
-		new Dungeon(n);
-	}
 }
