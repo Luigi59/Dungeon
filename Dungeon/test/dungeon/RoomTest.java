@@ -1,4 +1,4 @@
-package test;
+package dungeon;
 
 import static org.junit.Assert.*;
 
