@@ -18,8 +18,9 @@ public class Dungeon {
 	
 	public Dungeon(int n) {
 		rooms = new HashMap<Integer, Room>();
-		String path = "../../dungeons/" + n + ".txt";
-		readFile(path);
+		initializeDungeon(n);
+		player = new Player("You", 10);
+		player.setRoom(rooms.get(0));
 	}
 	
 	/**
@@ -50,26 +51,33 @@ public class Dungeon {
 	 */
 	public void readLine(String s) throws MapFileException {
 		String[] tmp = s.split(" ");
-		if(!rooms.containsKey(Integer.parseInt(tmp[0]))) {
-			switch(tmp[1]) {
-			case "normal": rooms.put(Integer.parseInt(tmp[0]), new NormalRoom()); break;
-			case "trap": rooms.put(Integer.parseInt(tmp[0]), new TrapRoom()); break;
-			case "exit": rooms.put(Integer.parseInt(tmp[0]), new ExitRoom()); break;
-			default: throw new MapFileException("Error into map's file.\n");
-			}	
-		} else if(!rooms.containsKey(Integer.parseInt(tmp[3]))) {
-			switch(tmp[4]) {
-			case "normal": rooms.put(Integer.parseInt(tmp[3]), new NormalRoom()); break;
-			case "trap": rooms.put(Integer.parseInt(tmp[3]), new TrapRoom()); break;
-			case "exit": rooms.put(Integer.parseInt(tmp[3]), new ExitRoom()); break;
-			default: throw new MapFileException("Error into map's file.\n");
-			}
-		}
+		if(!rooms.containsKey(Integer.parseInt(tmp[0])))
+			addRoomToMap(Integer.parseInt(tmp[0]), tmp[1]);
+		
+		if(!rooms.containsKey(Integer.parseInt(tmp[3])))
+			addRoomToMap(Integer.parseInt(tmp[3]), tmp[4]);
+
 		rooms.get(tmp[0]).addNeighbor(tmp[2], rooms.get(tmp[3]));
 	}
 	
-	public void initializeDungeon() {
-		
+	/**
+	 * Adds Room to the Map
+	 * @param num
+	 * @param type
+	 * @throws MapFileException
+	 */
+	public void addRoomToMap(int num, String type) throws MapFileException {
+		switch(type) {
+		case "normal": rooms.put(num, new NormalRoom()); break;
+		case "trap": rooms.put(num, new TrapRoom()); break;
+		case "exit": rooms.put(num, new ExitRoom()); break;
+		default: throw new MapFileException("Error into map's file.\n");
+		}
+	}
+	
+	public void initializeDungeon(int n) {
+		String path = "../../dungeons/" + n + ".txt";
+		readFile(path);
 	}
 	
 	public void interpretCommand(String command) {
