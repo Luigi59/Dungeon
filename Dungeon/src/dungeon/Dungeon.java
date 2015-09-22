@@ -20,7 +20,7 @@ public class Dungeon {
 		rooms = new HashMap<Integer, Room>();
 		initializeDungeon(n);
 		player = new Player("You", 10);
-		player.setRoom(rooms.get(0));
+		player.setRoom(rooms.get(1));
 	}
 	
 	/**
@@ -37,6 +37,7 @@ public class Dungeon {
 			while((line = br.readLine()) != null) {
 				readLine(line);
 			}
+			br.close();
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		}
@@ -56,8 +57,8 @@ public class Dungeon {
 		
 		if(!rooms.containsKey(Integer.parseInt(tmp[3])))
 			addRoomToMap(Integer.parseInt(tmp[3]), tmp[4]);
-
-		rooms.get(tmp[0]).addNeighbor(tmp[2], rooms.get(tmp[3]));
+		
+		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(tmp[3]));		
 	}
 	
 	/**
@@ -76,7 +77,7 @@ public class Dungeon {
 	}
 	
 	public void initializeDungeon(int n) {
-		String path = "../../dungeons/" + n + ".txt";
+		String path = "dungeons/" + n + ".txt";
 		readFile(path);
 	}
 	
