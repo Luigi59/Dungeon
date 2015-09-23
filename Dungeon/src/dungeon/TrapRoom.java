@@ -4,7 +4,7 @@ package dungeon;
 public class TrapRoom extends Room {
 
 	public TrapRoom() {
-		super(); 
+		super();
 	}
 	
 	@Override
@@ -14,6 +14,6 @@ public class TrapRoom extends Room {
 	
 	@Override
 	public String getDescription() {
-		return "It's a trap!";
+		return "a trap!";
 	}
 }

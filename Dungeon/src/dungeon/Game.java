@@ -23,9 +23,8 @@ public class Game {
 			System.out.print("> ");
 			
 			String line = dungeon.scanner.nextLine();
-			dungeon.interpretCommand(line);
+			interpretCommand(line);
 		} while (!gameIsFinished());
-		System.out.println("You are in "+ this.player.getRoom().getDescription());
 		if (gameIsWon()) {
 			System.out.println("You win!");
 		} else {
@@ -46,8 +45,7 @@ public class Game {
 	 * @return true is the game is lost 
 	 */
 	public boolean gameIsLost() {
-		Room trap = new TrapRoom();
-		return this.player.getRoom().equals(trap);
+		return this.player.getRoom().getClass() == TrapRoom.class;
 	}
 	
 	/**
@@ -55,9 +53,36 @@ public class Game {
 	 * @return true is the game is won
 	 */
 	public boolean gameIsWon() {
-		Room exit = new ExitRoom();
-		return this.player.getRoom().equals(exit);
+		return this.player.getRoom().getClass() == ExitRoom.class;
 	}
+	
+	public void interpretCommand(String command) {
+		Room currentRoom = this.player.getRoom();
+		
+		if (command.startsWith("go ")) {
+			move(command.substring(3),currentRoom);
+		}
+		else {
+			System.out.println("I don't know what you mean !");
+		}
+		
+	}
+	
+	public void move(String direction,Room currentRoom) {
+		for (Direction d : Direction.values()) {
+			if (d.toString().equals(direction)) {
+				System.out.println(currentRoom.getNeighbors());
+				if (currentRoom.getNeighbors().containsKey(direction)) {
+					this.player.setRoom(currentRoom.getNeighbor(direction));
+				}
+				else {
+					System.out.println("Can't go "+direction);
+				}
+			}
+		}	
+	}
+	
+
 	
 	
 }

@@ -14,6 +14,6 @@ public class ExitRoom extends Room{
 	
 	@Override
 	public String getDescription() {
-		return "This is the exit!";
+		return "the exit!";
 	}
 }

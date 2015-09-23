@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class Dungeon {
 
-	private Player player;
 	
 	protected final Scanner scanner = new Scanner(System.in);
 	
@@ -19,6 +18,8 @@ public class Dungeon {
 	public Dungeon(int n) {
 		rooms = new HashMap<Integer, Room>();
 		initializeDungeon(n);
+		System.out.println(rooms);
+		System.out.println(rooms.get(1).getNeighbors());
 		/**player = new Player("You", 10);
 		player.setRoom(rooms.get(1));*/
 	}
@@ -28,7 +29,7 @@ public class Dungeon {
 	}
 	
 	/**
-	 * Reads the file given in paramater.<br>
+	 * Reads the file given in parameter.<br>
 	 * For each line, call the {@link Dungeon#readLine(String)} method.
 	 * @param name
 	 */
@@ -61,8 +62,8 @@ public class Dungeon {
 		
 		if(!rooms.containsKey(Integer.parseInt(tmp[3])))
 			addRoomToMap(Integer.parseInt(tmp[3]), tmp[4]);
-		
-		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(tmp[3]));		
+	
+		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(Integer.parseInt(tmp[3])));		
 	}
 	
 	/**
@@ -85,23 +86,5 @@ public class Dungeon {
 		readFile(path);
 	}
 	
-	public void interpretCommand(String command) {
-		Room currentRoom = this.player.getRoom();
-		Room newRoom = currentRoom.getNeighbor(command);
-		switch(command) {
-		case "go north" :
-			this.player.setRoom(newRoom);
-			break;
-		case "go south" :
-			this.player.setRoom(newRoom);
-			break;
-		case "go west" :
-			this.player.setRoom(newRoom);
-			break;
-		case "go east" :
-			this.player.setRoom(newRoom);
-			break;
-		}
-	}
 	
 }

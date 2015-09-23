@@ -1,5 +1,6 @@
 package dungeon;
 
+
 public class NormalRoom extends Room {
 
 	public NormalRoom() {
@@ -13,6 +14,6 @@ public class NormalRoom extends Room {
 	
 	@Override
 	public String getDescription() {
-		return "It's an intersection.";
+		return "an intersection.";
 	}
 }
