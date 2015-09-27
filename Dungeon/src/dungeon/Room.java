@@ -55,4 +55,11 @@ public abstract class Room {
 	 * @return the description of the room
 	 */
 	public abstract String getDescription();
+	
+	public String getFullDescription() {
+		String res = getDescription() + "\n";
+		res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
+		return res;
+	}
+	
 }
