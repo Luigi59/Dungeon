@@ -17,6 +17,7 @@ public class Game {
 	 * start the game
 	 */
 	public void start() {
+		System.out.println(getGameDescription());
 		do {
 			System.out.println("You are in "+ this.player.getRoom().getDescription());
 			System.out.println("What do you want to do?");
@@ -56,6 +57,10 @@ public class Game {
 		return this.player.getRoom().getClass() == ExitRoom.class;
 	}
 	
+	/**
+	 * do what the player want to do
+	 * @param command the command of the player
+	 */
 	public void interpretCommand(String command) {
 		Room currentRoom = this.player.getRoom();
 		
@@ -68,10 +73,14 @@ public class Game {
 		
 	}
 	
+	/**
+	 * moves a player in the room with the desired direction if it's possible
+	 * @param direction the desired direction
+	 * @param currentRoom the current room of the player
+	 */
 	public void move(String direction,Room currentRoom) {
 		for (Direction d : Direction.values()) {
 			if (d.toString().equals(direction)) {
-				System.out.println(currentRoom.getNeighbors());
 				if (currentRoom.getNeighbors().containsKey(direction)) {
 					this.player.setRoom(currentRoom.getNeighbor(direction));
 				}
@@ -82,6 +91,17 @@ public class Game {
 		}	
 	}
 	
+	/**
+	 * gives the description of a game and the commands
+	 * @return the description
+	 */
+	public String getGameDescription() {
+		String s = "Welcome in the Dungeon!\n"
+				+ "The rules are simple, you have to progress in the dungeon to find the exit.\n"
+				+ "The commands are : go north, go south, go east and go west.";
+		return s;
+				
+	}
 
 	
 	

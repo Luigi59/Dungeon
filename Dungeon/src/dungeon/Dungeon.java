@@ -18,10 +18,6 @@ public class Dungeon {
 	public Dungeon(int n) {
 		rooms = new HashMap<Integer, Room>();
 		initializeDungeon(n);
-		System.out.println(rooms);
-		System.out.println(rooms.get(1).getNeighbors());
-		/**player = new Player("You", 10);
-		player.setRoom(rooms.get(1));*/
 	}
 	
 	public Room getRoomWithNumber(int number) {
