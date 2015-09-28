@@ -19,6 +19,9 @@ public class Game {
 	public void start() {
 		System.out.println(getGameDescription());
 		do {
+			if(player.isInFight()) {
+				System.out.println("");
+			}
 			System.out.println("You are in "+ this.player.getRoom().getFullDescription());
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
@@ -42,7 +45,7 @@ public class Game {
 	}
 	
 	/**
-	 * tells if the game is lost, you lost if you are in the trap room 
+	 * tells if the game is lost, you lost if you are dead
 	 * @return true is the game is lost 
 	 */
 	public boolean gameIsLost() {

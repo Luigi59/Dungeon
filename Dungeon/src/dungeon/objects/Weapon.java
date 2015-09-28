@@ -1,6 +1,6 @@
 package dungeon.objects;
 
-public class Weapon extends Object {
+public class Weapon extends Item {
 	
 	private int damage;
 	
@@ -18,7 +18,7 @@ public class Weapon extends Object {
 	}
 	
 	@Override
-	public String toString() {
+	public String getDescription() {
 		return "It's a weapon with "+this.damage+" damage(s)";
 	}
 }

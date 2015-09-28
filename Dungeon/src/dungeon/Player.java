@@ -53,6 +53,14 @@ public class Player {
 	}
 	
 	/**
+	 * Tells if the player is currently fighting or not.
+	 * @return
+	 */
+	public boolean isInFight() {
+		return this.getRoom().getMonster() != null && this.getHealthPoints() > 0;
+	}
+	
+	/**
 	 * gives the current Room of the player
 	 * @return the current Room of the player
 	 */

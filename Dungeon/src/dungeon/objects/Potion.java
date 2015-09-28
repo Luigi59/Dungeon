@@ -1,6 +1,6 @@
 package dungeon.objects;
 
-public class Potion extends Object {
+public class Potion extends Item {
 
 	private int hpWin;
 	
@@ -17,8 +17,7 @@ public class Potion extends Object {
 		return this.hpWin;
 	}
 	
-	@Override
-	public String toString() {
-		return "It's a potion that makes you win "+this.hpWin+" health point(s)";
+	public String getDescription() {
+		return "It's a potion that restores "+this.hpWin+" health point(s)";
 	}
 }

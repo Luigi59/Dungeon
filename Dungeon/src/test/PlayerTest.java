@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import dungeon.NormalRoom;
 import dungeon.Player;
-import dungeon.PlayerDeadException;
 import dungeon.Room;
 
 public class PlayerTest {

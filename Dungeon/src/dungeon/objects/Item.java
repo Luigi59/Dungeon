@@ -20,5 +20,5 @@ public abstract class Item {
 	 * gives the description of the object
 	 * @return the description of the object
 	 */
-	public abstract String toString();
+	public abstract String getDescription();
 }
