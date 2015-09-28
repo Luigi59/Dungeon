@@ -3,7 +3,7 @@ package dungeon.objects;
 public abstract class Item {
 
 	private String nameObject;
-	
+	 
 	public Item(String nameObject) {
 		this.nameObject = nameObject;
 	}
