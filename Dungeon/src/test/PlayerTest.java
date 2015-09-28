@@ -16,25 +16,25 @@ public class PlayerTest {
 	
 	@Before
 	public void createPlayer() {
-		p1 = new Player("Estelle",10);
+		p1 = new Player(10);
 		normalRoom = new NormalRoom();
 	}
 
 	@Test
 	public void testGetHealthPoints() {
-		assertEquals(10,p1.getHealthPoints());
+		assertEquals(10,p1.getHealth());
 	}
 
 	@Test
 	public void testSetHealthPoints() {
-		p1.setHealthPoints(20);
-		assertEquals(20,p1.getHealthPoints());
+		p1.setHealth(20);
+		assertEquals(20,p1.getHealth());
 	}
 	
 	@Test
 	public void testIdDead() {
 		assertFalse(p1.isDead());
-		p1.setHealthPoints(0);
+		p1.setHealth(0);
 		assertTrue(p1.isDead());
 	}
 

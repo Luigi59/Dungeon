@@ -20,7 +20,8 @@ public class Game {
 		System.out.println(getGameDescription());
 		do {
 			if(player.isInFight()) {
-				System.out.println("You are fighting " + player.getRoom().getMonster().getName() + ".");
+				System.out.println(player.toString());
+				System.out.println("You are fighting " + player.getRoom().getMonster().toString() + ".");
 				System.out.println("You can fight or use potion.");
 			} else
 				System.out.println("You are in "+ this.player.getRoom().getFullDescription());
@@ -68,7 +69,7 @@ public class Game {
 	public void interpretCommand(String command) {
 		Room currentRoom = this.player.getRoom();
 		
-		if(command == "fight")
+		if(command.equals("fight"))
 			fight();
 		else if(command.startsWith("use "))
 				useItem(command.substring(4));
@@ -105,7 +106,18 @@ public class Game {
 	}
 	
 	public void fight() {
-		
+		if(!player.isInFight())
+			System.out.println("There is nothing to fight.");
+		else {
+			Monster monster = player.getRoom().getMonster();
+			monster.setHealth(monster.getHealth() - player.getAttack());
+			if(!monster.isDead())
+				player.setHealth(player.getHealth() - monster.getAttack());
+			else {
+				player.getRoom().setMonster(null);
+				System.out.println("You defeated " + monster.getName() + ".");
+			}
+		}
 	}
 	
 	public void useItem(String str) {

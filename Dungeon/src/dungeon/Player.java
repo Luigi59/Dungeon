@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dungeon.objects.Item;
+import dungeon.objects.Weapon;
 
 /** A player in the game Dungeon */
-public class Player {
+public class Player extends Character {
 
-	private String name;
-	private int healthPoints;
 	private Room currentRoom;
 	private Map<String,Item> bag;
 	
@@ -18,38 +17,10 @@ public class Player {
 	 * @param name the name of the player
 	 * @param HP the number of health points of the player
 	 */
-	public Player(String name,int HP) {
-		this.name = name;
-		this.healthPoints = HP;
+	public Player(int health) {
+		super(health, 1);
 		this.currentRoom = null;
 		this.bag = new HashMap<String,Item>();
-	}
-	
-	/**
-	 * gives the number of health points
-	 * @return the number of health points
-	 */
-	public int getHealthPoints() {
-		return this.healthPoints;
-	}
-	
-	/**
-	 * changes the health points of the player
-	 * @param HP the new number of health points
-	 */
-	public void setHealthPoints(int HP) {
-		if (isDead())
-			System.out.println("You are dead!");
-		else
-		this.healthPoints = HP;
-	}
-	
-	/**
-	 * Tells if the player is dead or not.
-	 * @return boolean
-	 */
-	public boolean isDead() {
-		return this.healthPoints <= 0;
 	}
 	
 	/**
@@ -57,7 +28,7 @@ public class Player {
 	 * @return
 	 */
 	public boolean isInFight() {
-		return this.getRoom().getMonster() != null && this.getHealthPoints() > 0;
+		return this.getRoom().getMonster() != null && this.getHealth() > 0;
 	}
 	
 	/**
@@ -84,12 +55,17 @@ public class Player {
 		this.bag.put(item.getName(),item);
 	}
 	
-	/**
-	 * gives a description of the player
-	 * @return the description of the player
-	 */
-	public String toString() {
-		String s = "Your name is : "+this.name+"\nNumber of health points : "+this.healthPoints;
-		return s;
+	public int getAttack() {
+		int res = super.getAttack();
+		if(bag.containsKey("weapon") && !bag.get("weapon").equals(null)) {
+			Weapon w = (Weapon) (bag.get("weapon"));
+			res += w.getDamage();
+		}
+		return res;
 	}
+	
+	public String toString() {
+		return "You have " + health + "/" + maxHealth + " HP and " + attack + " ATK.";
+	}
+	
 }

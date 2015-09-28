@@ -1,55 +1,12 @@
 package dungeon;
 
-public class Monster {
+public class Monster extends Character {
 
 	private String name;
-	private int healthPoints;
-	private int attackPoints;
-	private boolean alive;
 	
-	public Monster(String name, int hp, int attackPoints) {
-		this.healthPoints = hp;
-		this.attackPoints = attackPoints;
+	public Monster(String name, int health, int attack) {
+		super(health, attack);
 		this.name = name;
-		this.alive = true;
-	}
-	
-	/**
-	 * gives the number of health points
-	 * @return the number of health points
-	 */
-	public int getHealthPoints() {
-		return this.healthPoints;
-	}
-	
-	/**
-	 * changes the health points of the monster
-	 * @param hp the new number of health points
-	 */
-	public void setHealthPoints(int hp) {
-		if (hp <=0) {
-			this.healthPoints = 0;
-			setAlive(false);
-		}
-		else {
-			this.healthPoints = hp;
-		}
-	}
-	
-	/**
-	 * tells if a monster is alive or not
-	 * @return true if the monster is alive and false if not
-	 */
-	public boolean isALive() {
-		return this.alive;
-	}
-	
-	/**
-	 * changes the state of live of the monster
-	 * @param alive state of life
-	 */
-	public void setAlive(boolean alive) {
-		this.alive = alive;
 	}
 	
 	/**
@@ -60,16 +17,8 @@ public class Monster {
 		return this.name;
 	}
 	
-	/**
-	 * gives the number of attack points of the monster
-	 * @return the number of attack points
-	 */
-	public int getAttackPoints() {
-		return this.attackPoints;
-	}
-	
 	public String toString() {
-		return "";
+		return getName() + " (HP : " + getHealth() + "/" + maxHealth + " ; ATK : " + getAttack() + ")";
 	}
 }
 
