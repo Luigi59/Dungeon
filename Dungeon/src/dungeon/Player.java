@@ -31,11 +31,10 @@ public class Player {
 	/**
 	 * changes the health points of the player
 	 * @param HP the new number of health points
-	 * @throws PlayerDeadException
 	 */
-	public void setHealthPoints(int HP) throws PlayerDeadException {
+	public void setHealthPoints(int HP) {
 		if (HP <= 0) {
-			throw new PlayerDeadException("The player is dead.\n");
+			System.out.println("You are dead!");
 		}
 		else {
 		this.healthPoints = HP;
