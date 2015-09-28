@@ -124,4 +124,12 @@ public abstract class Room {
 		return monster;
 	}
 	
+	/**
+	 * Set the monster of the room.
+	 * @param monster
+	 */
+	public void setMonster(Monster monster) {
+		this.monster = monster;
+	}
+	
 }

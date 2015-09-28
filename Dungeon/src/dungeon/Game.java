@@ -20,9 +20,10 @@ public class Game {
 		System.out.println(getGameDescription());
 		do {
 			if(player.isInFight()) {
-				System.out.println("");
-			}
-			System.out.println("You are in "+ this.player.getRoom().getFullDescription());
+				System.out.println("You are fighting " + player.getRoom().getMonster().getName() + ".");
+				System.out.println("You can fight or use potion.");
+			} else
+				System.out.println("You are in "+ this.player.getRoom().getFullDescription());
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			
@@ -67,7 +68,11 @@ public class Game {
 	public void interpretCommand(String command) {
 		Room currentRoom = this.player.getRoom();
 		
-		if (command.startsWith("go ")) {
+		if(command == "fight")
+			fight();
+		else if(command.startsWith("use "))
+				useItem(command.substring(4));
+		else if (command.startsWith("go ")) {
 			move(command.substring(3),currentRoom);
 		}
 		else {
@@ -84,14 +89,27 @@ public class Game {
 	public void move(String direction,Room currentRoom) {
 		for (Direction d : Direction.values()) {
 			if (d.toString().equals(direction)) {
-				if (currentRoom.getNeighbors().containsKey(direction)) {
+				if (currentRoom.getNeighbors().containsKey(direction) && currentRoom.getMonster() == null) {
 					this.player.setRoom(currentRoom.getNeighbor(direction));
+					System.out.println("You go " + direction + ".");
+					if(player.getRoom().getMonster() != null)
+						System.out.println(player.getRoom().getMonster().getName() + " is guarding the room.");
 				}
 				else {
-					System.out.println("Can't go "+direction);
+					System.out.println("Can't go "+ direction + "!");
+					if(currentRoom.getMonster() != null)
+						System.out.println("You are currently fighting !");
 				}
 			}
 		}	
+	}
+	
+	public void fight() {
+		
+	}
+	
+	public void useItem(String str) {
+		
 	}
 	
 	/**

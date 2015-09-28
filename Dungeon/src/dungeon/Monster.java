@@ -7,10 +7,10 @@ public class Monster {
 	private int attackPoints;
 	private boolean alive;
 	
-	public Monster(int hp, int attackPoints) {
+	public Monster(String name, int hp, int attackPoints) {
 		this.healthPoints = hp;
 		this.attackPoints = attackPoints;
-		this.name = "Monster";
+		this.name = name;
 		this.alive = true;
 	}
 	
@@ -66,6 +66,10 @@ public class Monster {
 	 */
 	public int getAttackPoints() {
 		return this.attackPoints;
+	}
+	
+	public String toString() {
+		return "";
 	}
 }
 

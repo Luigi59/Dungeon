@@ -35,8 +35,12 @@ public class Dungeon {
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
 			String line;
-			while((line = br.readLine()) != null) {
-				readLine(line);
+			if(name.startsWith("dungeons/")) {
+				while((line = br.readLine()) != null)
+					readDungeonLine(line);
+			} else if(name.startsWith("monsters/")) {
+				while((line = br.readLine()) != null)
+					readMonsterLine(line);
 			}
 			br.close();
 		} catch(Exception e) {
@@ -51,7 +55,7 @@ public class Dungeon {
 	 * @param s - String
 	 * @throws MapFileException
 	 */
-	public void readLine(String s) throws MapFileException {
+	public void readDungeonLine(String s) throws MapFileException {
 		String[] tmp = s.split(" ");
 		if(!rooms.containsKey(Integer.parseInt(tmp[0])))
 			addRoomToMap(Integer.parseInt(tmp[0]), tmp[1]);
@@ -60,6 +64,11 @@ public class Dungeon {
 			addRoomToMap(Integer.parseInt(tmp[3]), tmp[4]);
 	
 		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(Integer.parseInt(tmp[3])));		
+	}
+	
+	public void readMonsterLine(String s) throws MonsterFileException {
+		String[] tmp = s.split(" ");
+		rooms.get(Integer.parseInt(tmp[0])).setMonster(new Monster(tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3])));
 	}
 	
 	/**
@@ -79,6 +88,8 @@ public class Dungeon {
 	
 	public void initializeDungeon(int n) {
 		String path = "dungeons/" + n + ".txt";
+		readFile(path);
+		path = "monsters/" + n + ".txt";
 		readFile(path);
 	}
 	
