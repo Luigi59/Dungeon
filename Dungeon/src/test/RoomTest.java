@@ -76,11 +76,17 @@ public class RoomTest {
 	
 	@Test
 	public void testGetDescription() {
-		assertEquals("It's an intersection.", normalRoom.getDescription());
-		assertEquals("This is the exit!", exitRoom.getDescription());
-		assertEquals("It's a trap!", trapRoom.getDescription());
+		assertEquals("an intersection.", normalRoom.getDescription());
+		assertEquals("the exit!", exitRoom.getDescription());
+		assertEquals("a trap!", trapRoom.getDescription());
 	}
 	
-	// test
+	@Test
+	public void testCanBeLeft() {
+		assertEquals(true, normalRoom.canBeLeft());
+		assertEquals(true, exitRoom.canBeLeft());
+		assertEquals(false, trapRoom.canBeLeft());
+	}
+	
 
 }
