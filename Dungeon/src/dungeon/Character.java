@@ -28,6 +28,10 @@ public class Character {
 		this.health = health;
 	}
 	
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+	
 	/**
 	 * Tells if the character is dead or not.
 	 * @return boolean

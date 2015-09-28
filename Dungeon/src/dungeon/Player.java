@@ -47,12 +47,16 @@ public class Player extends Character {
 		this.currentRoom = newRoom;
 	}
 	
+	public Map<String,Item> getBag() {
+		return bag;
+	}
+	
 	/**
 	 * add a item into the bag
 	 * @param item 
 	 */
 	public void addItem(Item item) {
-		this.bag.put(item.getName(),item);
+		this.bag.put(item.getType(), item);
 	}
 	
 	public int getAttack() {

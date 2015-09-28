@@ -21,4 +21,9 @@ public class Weapon extends Item {
 	public String getDescription() {
 		return "It's a weapon with "+this.damage+" damage(s)";
 	}
+
+	@Override
+	public String getType() {
+		return "weapon";
+	}
 }

@@ -20,4 +20,9 @@ public class Potion extends Item {
 	public String getDescription() {
 		return "It's a potion that restores "+this.hpWin+" health point(s)";
 	}
+
+	@Override
+	public String getType() {
+		return "potion";
+	}
 }

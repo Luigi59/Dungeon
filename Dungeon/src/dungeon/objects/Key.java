@@ -14,5 +14,9 @@ public class Key extends Item {
 	public String getDescription() {
 		return "It's a key that opens a locked room";
 	}
+
+	public String getType() {
+		return "key";
+	}
 	
 }
