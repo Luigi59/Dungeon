@@ -1,13 +1,17 @@
 package dungeon;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import dungeon.objects.Item;
+
 /** A player in the game Dungeon */
 public class Player {
 
 	private String name;
-	
 	private int healthPoints;
-	
 	private Room currentRoom;
+	private Map<String,Item> bag;
 	
 	/**
 	 * 
@@ -18,6 +22,7 @@ public class Player {
 		this.name = name;
 		this.healthPoints = HP;
 		this.currentRoom = null;
+		this.bag = new HashMap<String,Item>();
 	}
 	
 	/**
@@ -61,6 +66,14 @@ public class Player {
 	 */
 	public void setRoom(Room newRoom) {
 		this.currentRoom = newRoom;
+	}
+	
+	/**
+	 * add a item into the bag
+	 * @param item 
+	 */
+	public void addItem(Item item) {
+		this.bag.put(item.getName(),item);
 	}
 	
 	/**
