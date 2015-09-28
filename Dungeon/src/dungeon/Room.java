@@ -5,10 +5,42 @@ import java.util.Map;
 
 public abstract class Room {
 
-	protected Map<String,Room> neighbors;	
+	protected Map<String,Room> neighbors;
+	protected boolean locked;
+	protected Monster monster;
 	
+	/**
+	 * If no parameter, by default a room is not locked and has no monster.
+	 */
 	public Room() {
+		this(false, null);
+	}
+	
+	/**
+	 * Room locked or not, with no monster
+	 * @param locked
+	 */
+	public Room(boolean locked) {
+		this(locked, null);
+	}
+	
+	/**
+	 * Room with a monster
+	 * @param monster
+	 */
+	public Room(Monster monster) {
+		this(false, monster);
+	}
+	
+	/**
+	 * Room locked or not, with a monster
+	 * @param locked
+	 * @param monster
+	 */
+	public Room(boolean locked, Monster monster) {
 		this.neighbors = new HashMap<String,Room>();
+		this.locked = locked;
+		this.monster = monster;
 	}
 	
 	/**
@@ -60,6 +92,36 @@ public abstract class Room {
 		String res = getDescription() + "\n";
 		res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
+	}
+	
+	/**
+	 * Tells if the room is locked or not.
+	 * @return
+	 */
+	public boolean isLocked() {
+		return locked;
+	}
+	
+	/**
+	 * Locks the room.
+	 */
+	public void lock() {
+		locked = true;
+	}
+	
+	/**
+	 * Unlocks the room.
+	 */
+	public void unlock() {
+		locked = false;
+	}
+	
+	/**
+	 * Get the monster of the room, or null if there is none.
+	 * @return Monster
+	 */
+	public Monster getMonster() {
+		return monster;
 	}
 	
 }

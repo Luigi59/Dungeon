@@ -33,12 +33,18 @@ public class Player {
 	 * @param HP the new number of health points
 	 */
 	public void setHealthPoints(int HP) {
-		if (HP <= 0) {
+		if (isDead())
 			System.out.println("You are dead!");
-		}
-		else {
+		else
 		this.healthPoints = HP;
-		}
+	}
+	
+	/**
+	 * Tells if the player is dead or not.
+	 * @return boolean
+	 */
+	public boolean isDead() {
+		return this.healthPoints <= 0;
 	}
 	
 	/**
