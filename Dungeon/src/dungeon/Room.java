@@ -2,6 +2,7 @@ package dungeon;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class Room {
 
@@ -90,7 +91,14 @@ public abstract class Room {
 	
 	public String getFullDescription() {
 		String res = getDescription() + "\n";
-		res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
+		res += "You can go ";
+		if(getNeighbors().size() < 1)
+			res += "nowhere !";
+		else
+			for(Entry<String, Room> entry : neighbors.entrySet())
+				res += entry.getKey() +", ";
+		res = res.substring(0, res.length()-2) + ".";
+		//res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
 	}
 	

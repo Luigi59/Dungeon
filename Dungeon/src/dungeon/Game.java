@@ -93,6 +93,10 @@ public class Game {
 				if (currentRoom.getNeighbors().containsKey(direction) && currentRoom.getMonster() == null) {
 					this.player.setRoom(currentRoom.getNeighbor(direction));
 					System.out.println("You go " + direction + ".");
+					if(player.getRoom().getClass() == TrapRoom.class) {
+						System.out.println("Ouch ! You lost 2 health points.");
+						player.setHealth(player.getHealth() - 2);
+					}
 					if(player.getRoom().getMonster() != null)
 						System.out.println(player.getRoom().getMonster().getName() + " is guarding the room.");
 				}
@@ -131,7 +135,8 @@ public class Game {
 	public String getGameDescription() {
 		String s = "Welcome in the Dungeon!\n"
 				+ "The rules are simple, you have to progress in the dungeon to find the exit.\n"
-				+ "The commands are : go north, go south, go east and go west.";
+				+ "The commands are : go north, go south, go east and go west.\n"
+				+ "----------------------------------------------------------------------------------------------";
 		return s;
 				
 	}
