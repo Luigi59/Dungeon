@@ -87,6 +87,5 @@ public class RoomTest {
 		assertEquals(true, exitRoom.canBeLeft());
 		assertEquals(false, trapRoom.canBeLeft());
 	}
-	
 
 }

@@ -19,7 +19,7 @@ public class Game {
 	public void start() {
 		System.out.println(getGameDescription());
 		do {
-			System.out.println("You are in "+ this.player.getRoom().getDescription());
+			System.out.println("You are in "+ this.player.getRoom().getFullDescription());
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			
@@ -70,7 +70,7 @@ public class Game {
 		else {
 			System.out.println("I don't know what you mean !");
 		}
-		
+		System.out.println("-------------------------------------------------------");
 	}
 	
 	/**
