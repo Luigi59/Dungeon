@@ -27,12 +27,7 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testSetHealthPoints() throws PlayerDeadException  {
-	try {
-		p1.setHealthPoints(0);
-	} catch (PlayerDeadException e) {
-		e.getMessage();
-	}
+	public void testSetHealthPoints() {
 	p1.setHealthPoints(20);
 	assertEquals(20,p1.getHealthPoints());
 	}
