@@ -28,8 +28,15 @@ public class PlayerTest {
 
 	@Test
 	public void testSetHealthPoints() {
-	p1.setHealthPoints(20);
-	assertEquals(20,p1.getHealthPoints());
+		p1.setHealthPoints(20);
+		assertEquals(20,p1.getHealthPoints());
+	}
+	
+	@Test
+	public void testIdDead() {
+		assertFalse(p1.isDead());
+		p1.setHealthPoints(0);
+		assertTrue(p1.isDead());
 	}
 
 	@Test

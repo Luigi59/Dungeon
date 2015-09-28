@@ -46,7 +46,7 @@ public class Game {
 	 * @return true is the game is lost 
 	 */
 	public boolean gameIsLost() {
-		return this.player.getRoom().getClass() == TrapRoom.class;
+		return this.player.isDead();
 	}
 	
 	/**
