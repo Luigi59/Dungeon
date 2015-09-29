@@ -6,10 +6,18 @@ public class Chest {
 	
 	protected Item item;
 	
+	/**
+	 * a chest with a item inside
+	 * @param item
+	 */
 	public Chest(Item item) {
 		this.item = item;
 	}
 
+	/**
+	 * open a chest and return the item
+	 * @return the item that is in the chest
+	 */
 	public Item open() {
 		Item res = null;
 		if(item == null)

@@ -4,6 +4,11 @@ public class Weapon extends Item {
 	
 	private int damage;
 	
+	/**
+	 * a weapon
+	 * @param name the name of the weapon
+	 * @param damage the damage of the weapon
+	 */
 	public Weapon(String name, int damage) {
 		super(name);
 		this.damage = damage;

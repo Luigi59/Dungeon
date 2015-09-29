@@ -19,13 +19,22 @@ public class Dungeon {
 	
 	protected final Scanner scanner = new Scanner(System.in);
 	
-	Map<Integer, Room> rooms;
+	protected Map<Integer, Room> rooms;
 	
+	/**
+	 * a dungeon 
+	 * @param n the number of the dungeon
+	 */
 	public Dungeon(int n) {
 		rooms = new HashMap<Integer, Room>();
 		initializeDungeon(n);
 	}
 	
+	/**
+	 * gives the Room with its number
+	 * @param number the number of the room
+	 * @return the room
+	 */
 	public Room getRoomWithNumber(int number) {
 		return this.rooms.get(number);
 	}
@@ -33,7 +42,7 @@ public class Dungeon {
 	/**
 	 * Reads the file given in parameter.<br>
 	 * For each line, call the {@link Dungeon#readLine(String)} method.
-	 * @param name
+	 * @param name the name of the file
 	 */
 	public void readFile(String name) {
 		try {
@@ -58,7 +67,7 @@ public class Dungeon {
 	}
 	
 	/**
-	 * Reads the current line of file.<br>
+	 * Reads the current line of the file.<br>
 	 * Adds Room(s) to the Map<Integer, Room> if it does not exists already.<br>
 	 * Add the corresponding neighbor to the room given in the line informations.
 	 * @param s - String
@@ -75,12 +84,23 @@ public class Dungeon {
 		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(Integer.parseInt(tmp[3])));		
 	}
 	
+	/**
+	 * Reads the current line of the file.<br>
+	 * Add Monster to a room
+	 * @param s
+	 * @throws MonsterFileException
+	 */
 	public void readMonsterLine(String s) throws MonsterFileException {
 		String[] tmp = s.split(":");
-		//System.out.println(tmp[0]);
 		rooms.get(Integer.parseInt(tmp[0])).setMonster(new Monster(tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3])));
 	}
 	
+	/**
+	 * Read the current line of the file.<br>
+	 * Add Chest to a room
+	 * @param s
+	 * @throws ChestFileException
+	 */
 	public void readChestLine(String s) throws ChestFileException {
 		String[] tmp = s.split(":");
 		Room room = rooms.get(Integer.parseInt(tmp[0]));
@@ -96,8 +116,8 @@ public class Dungeon {
 	
 	/**
 	 * Adds Room to the Map
-	 * @param num
-	 * @param type
+	 * @param num the number of the room
+	 * @param type the type of the room
 	 * @throws MapFileException
 	 */
 	public void addRoomToMap(int num, String type) throws MapFileException {
@@ -109,6 +129,10 @@ public class Dungeon {
 		}
 	}
 	
+	/**
+	 * initialize the dungeon
+	 * @param n the number of the dungeon
+	 */
 	public void initializeDungeon(int n) {
 		String path = "dungeons/" + n + ".txt";
 		readFile(path);

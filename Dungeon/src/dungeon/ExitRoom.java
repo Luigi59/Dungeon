@@ -3,6 +3,9 @@ package dungeon;
 
 public class ExitRoom extends Room{
 
+	/**
+	 * A exit room
+	 */
 	public ExitRoom() {
 		super();
 	}

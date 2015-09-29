@@ -16,6 +16,11 @@ public class Game {
 	
 	private Dungeon dungeon;
 	
+	/**
+	 * a game 
+	 * @param dungeon 
+	 * @param player the player who are in the dungeon
+	 */
 	public Game(Dungeon dungeon, Player player) {
 		this.dungeon = dungeon;
 		this.player = player;
@@ -65,7 +70,7 @@ public class Game {
 	}
 	
 	/**
-	 * tells if the game is won, you won if you are in the exit room
+	 * tells if the game is won, the player win if you are in the exit room
 	 * @return true is the game is won
 	 */
 	public boolean gameIsWon() {
@@ -125,6 +130,9 @@ public class Game {
 		}	
 	}
 	
+	/**
+	 * fight with a monster
+	 */
 	public void fight() {
 		if(!player.isInFight())
 			System.out.println("There is nothing to fight.");
@@ -140,6 +148,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * open a chest and if there is a item, add the item to the inventory of the player 
+	 */
 	public void openChest() {
 		Chest chest = player.getRoom().getChest();
 		if(chest == null)
@@ -151,14 +162,24 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * gives the inventory of the player
+	 */
 	public void inventory() {
 		System.out.println(player.getInventory());
 	}
 	
+	/**
+	 * gives the description of a player
+	 */
 	public void description() {
 		System.out.println(player.toString());
 	}
 	
+	/**
+	 * use a item
+	 * @param str the type of the item
+	 */
 	public void useItem(String str) {
 		switch(str) {
 		// potion
@@ -208,7 +229,8 @@ public class Game {
 	public String getGameDescription() {
 		String s = "Welcome in the Dungeon!\n"
 				+ "The rules are simple, you have to progress in the dungeon to find the exit.\n"
-				+ "The commands are : go north, go south, go east and go west.\n"
+				+ "The commands for the direction are : go north, go south, go east and go west.\n"
+				+ "The other commands are : open chest, fight, use (+the name of the item), description and inventory.\n"
 				+ "----------------------------------------------------------------------------------------------";
 		return s;
 				

@@ -4,6 +4,10 @@ public abstract class Item {
 
 	private String nameObject;
 	 
+	/**
+	 * a abstract item
+	 * @param nameObject the name of the item
+	 */
 	public Item(String nameObject) {
 		this.nameObject = nameObject;
 	}
@@ -22,5 +26,9 @@ public abstract class Item {
 	 */
 	public abstract String getDescription();
 	
+	/**
+	 * gives the type of the item
+	 * @return the type
+	 */
 	public abstract String getType();
 }

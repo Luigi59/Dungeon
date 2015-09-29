@@ -8,12 +8,15 @@ public class Button {
 	
 	/**
 	 * A button unlocks a room (given in parameter) in the dungeon
-	 * @param room
+	 * @param linkedRoom
 	 */
 	public Button(Room linkedRoom) {
 		this.linkedRoom = linkedRoom;
 	}
 	
+	/**
+	 * activates the button
+	 */
 	public void activate() {
 		if(!linkedRoom.isLocked())
 			System.out.println("This button has already been activated.");

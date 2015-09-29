@@ -3,6 +3,9 @@ package dungeon;
 
 public class TrapRoom extends Room {
 
+	/**
+	 * A trap Room
+	 */
 	public TrapRoom() {
 		super();
 	}

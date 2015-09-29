@@ -39,7 +39,7 @@ public abstract class Room {
 	 * gives the room with its associated direction
 	 * @param direction 
 	 * @return the room with its direction
-	 * @exception 
+	 * @exception NullPointerException
 	 */
 	public Room getNeighbor(String direction) throws NullPointerException {
 		if (this.neighbors.containsKey(direction)) {
@@ -71,6 +71,11 @@ public abstract class Room {
 	 */
 	public abstract String getDescription();
 	
+	/**
+	 * gives the full description of the room <br>
+	 * like where the player can go , if there are cheats or buttons
+	 * @return a string 
+	 */
 	public String getFullDescription() {
 		String res = getDescription() + "\n";
 		res += "You can go ";
@@ -86,13 +91,13 @@ public abstract class Room {
 			res += "There is a chest.";
 		else if(chest == null && button != null)
 			res += "Theres is a button.";
-		//res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
+		//res += "(infos supplï¿½mentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
 	}
 	
 	/**
 	 * Tells if the room is locked or not.
-	 * @return
+	 * @return true if the room is locked and false if not
 	 */
 	public boolean isLocked() {
 		return locked;
@@ -130,7 +135,7 @@ public abstract class Room {
 	
 	/**
 	 * Get the chest of the room, or null if there is none.
-	 * @return
+	 * @return chest
 	 */
 	public Chest getChest() {
 		return chest;
@@ -146,7 +151,7 @@ public abstract class Room {
 	
 	/**
 	 * Get the button of the room, or null if there is none.
-	 * @return
+	 * @return button
 	 */
 	public Button getButton() {
 		return button;

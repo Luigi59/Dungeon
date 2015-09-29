@@ -6,9 +6,14 @@ public class Character {
 	protected int maxHealth;
 	protected int attack;
 	
+	/**
+	 * a character
+	 * @param health the number of health points
+	 * @param attack the number of attack points
+	 */
 	public Character(int health, int attack) {
 		this.health = health;
-		maxHealth = health;
+		this.maxHealth = health;
 		this.attack = attack;
 	}
 	
@@ -22,19 +27,23 @@ public class Character {
 	
 	/**
 	 * changes the health points of the character
-	 * @param HP the new number of health points
+	 * @param health the new number of health points
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 	
+	/**
+	 * gives the maximum number of health points
+	 * @return the number of max health points
+	 */
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 	
 	/**
 	 * Tells if the character is dead or not.
-	 * @return boolean
+	 * @return true if the character is dead and false if not
 	 */
 	public boolean isDead() {
 		return health <= 0;

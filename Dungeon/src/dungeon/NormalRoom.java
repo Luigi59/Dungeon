@@ -3,6 +3,9 @@ package dungeon;
 
 public class NormalRoom extends Room {
 
+	/**
+	 * A normal room
+	 */
 	public NormalRoom() {
 		super();
 	}

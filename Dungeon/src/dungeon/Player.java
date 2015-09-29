@@ -11,7 +11,6 @@ import objects.Key;
 import objects.Potion;
 import objects.Weapon;
 
-/** A player in the game Dungeon */
 public class Player extends Character {
 
 	protected Room currentRoom;
@@ -19,7 +18,7 @@ public class Player extends Character {
 	protected List<Key> keys;
 	
 	/**
-	 * 
+	 * a player
 	 * @param name the name of the player
 	 * @param HP the number of health points of the player
 	 */
@@ -32,7 +31,7 @@ public class Player extends Character {
 	
 	/**
 	 * Tells if the player is currently fighting or not.
-	 * @return
+	 * @return true if is in fight and false if not
 	 */
 	public boolean isInFight() {
 		return this.getRoom().getMonster() != null && this.getHealth() > 0;
@@ -54,6 +53,10 @@ public class Player extends Character {
 		this.currentRoom = newRoom;
 	}
 	
+	/**
+	 * return all the item of the bag
+	 * @return all the item of the bag
+	 */
 	public Map<String,Item> getBag() {
 		return bag;
 	}
@@ -94,6 +97,10 @@ public class Player extends Character {
 		this.bag.put(item.getType(), item);
 	}
 	
+	/**
+	 * gives the number of attack points of the player
+	 * @return the number of attack points 
+	 */
 	public int getAttack() {
 		int res = super.getAttack();
 		if(bag.containsKey("weapon") && !bag.get("weapon").equals(null)) {
@@ -103,20 +110,32 @@ public class Player extends Character {
 		return res;
 	}
 	
+	/**
+	 * gives all the key of the player
+	 * @return a list of keys of the player
+	 */
 	public List<Key> getKeys() {
 		return keys;
 	}
 	
+	/**
+	 * the player drink a potion
+	 * @param potion 
+	 */
 	public void drinkPotion(Potion potion) {
 		int tmp = health;
 		health += potion.getHpWin();
 		if(health > maxHealth)
 			health = maxHealth;
 		tmp = health - tmp;
-		System.out.println("You drink " + potion.getName() + " and restore " + tmp + "health points.");
+		System.out.println("You drink " + potion.getName() + " and restore " + tmp + " health points.");
 		getBag().remove("potion");
 	}
 	
+	/**
+	 * gives all the information of the inventory
+	 * @return all the information of the inventory
+	 */
 	public String getInventory() {
 		String res = "";
 		res += "Items : ";
@@ -131,6 +150,10 @@ public class Player extends Character {
 		return res;
 	}
 	
+	/**
+	 * gives the information of the player
+	 * @return the information of the player
+	 */
 	public String toString() {
 		return "You have " + health + "/" + maxHealth + " HP and " + attack + " ATK.";
 	}
