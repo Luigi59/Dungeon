@@ -118,6 +118,21 @@ public class CharacterTest {
 	}
 
 	@Test
+	public void testDrinkPotion() {
+		Map<String, Item> bag = new HashMap<String, Item>();
+		p1.setHealth(5);
+		p1.drinkPotion(potion);
+		assertEquals(10, p1.getHealth());
+		assertEquals(bag, p1.getBag());
+	}
+	
+	@Test
+	public void TestGetInventory() {
+		assertEquals("Items : Healing potion\nKeys : 0",p1.getInventory());
+		
+	}
+	
+	@Test
 	public void testToString() {
 		assertEquals("You have " + p1.getHealth() + "/" + p1.getMaxHealth() + " HP and " + p1.getAttack() + " ATK.", p1.toString());
 		assertEquals(m1.getName() + " (HP : " + m1.getHealth() + "/" + m1.getMaxHealth() + " ; ATK : " + m1.getAttack() + ")", m1.toString());
