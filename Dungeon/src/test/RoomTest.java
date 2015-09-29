@@ -9,9 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dungeon.ExitRoom;
+import dungeon.Monster;
 import dungeon.NormalRoom;
 import dungeon.Room;
 import dungeon.TrapRoom;
+import entity.Button;
+import entity.Chest;
+import objects.Weapon;
 
 public class RoomTest {
 	
@@ -24,6 +28,9 @@ public class RoomTest {
 		normalRoom = new NormalRoom();
 		trapRoom = new TrapRoom();
 		exitRoom = new ExitRoom();
+		normalRoom = new NormalRoom(false);
+		trapRoom = new TrapRoom(false);
+		exitRoom = new ExitRoom(false);
 		normalRoom.getNeighbors().put("west", trapRoom);
 		trapRoom.getNeighbors().put("east", normalRoom);
 		normalRoom.getNeighbors().put("north", exitRoom);
@@ -36,6 +43,11 @@ public class RoomTest {
 		assertEquals(normalRoom, trapRoom.getNeighbor("east"));
 		assertEquals(exitRoom, normalRoom.getNeighbor("north"));
 		assertEquals(normalRoom, exitRoom.getNeighbor("south"));
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testNeighborDoesNotExist() {
+		normalRoom.getNeighbor("south");
 	}
 	
 	@Test
@@ -82,10 +94,55 @@ public class RoomTest {
 	}
 	
 	@Test
+	public void testGetFullDescription() {
+		normalRoom.setButton(new Button(exitRoom));
+		normalRoom.setChest(new Chest(new Weapon("Wooden sword", 1)));
+		trapRoom.setButton(new Button(exitRoom));
+		exitRoom.setChest(new Chest(new Weapon("Excalibur", 50)));
+		assertEquals("an intersection.\nYou can go north, west.\nThere is a chest and a button.", normalRoom.getFullDescription());
+		assertEquals("a trap!\nYou can go east.\nThere is a button.", trapRoom.getFullDescription());
+		assertEquals("the exit!\nYou can go south.\nThere is a chest.", exitRoom.getFullDescription());
+		assertEquals("an intersection.\nYou can go nowhere.\n", new NormalRoom().getFullDescription());
+	}
+	
+	@Test
 	public void testCanBeLeft() {
 		assertEquals(true, normalRoom.canBeLeft());
 		assertEquals(true, exitRoom.canBeLeft());
 		assertEquals(false, trapRoom.canBeLeft());
+	}
+	
+	@Test
+	public void testIsLocked() {
+		assertFalse(normalRoom.isLocked());
+		normalRoom.lock();
+		assertTrue(normalRoom.isLocked());
+		normalRoom.unlock();
+		assertFalse(normalRoom.isLocked());
+	}
+	
+	@Test
+	public void testGetMonster() {
+		assertEquals(null, normalRoom.getMonster());
+		Monster munch = new Monster("munch", 1, 1);
+		normalRoom.setMonster(munch);
+		assertEquals(munch, normalRoom.getMonster());
+	}
+	
+	@Test
+	public void testGetChest() {
+		assertEquals(null, normalRoom.getChest());
+		Chest c = new Chest(new Weapon("test", 1));
+		normalRoom.setChest(c);
+		assertEquals(c, normalRoom.getChest());
+	}
+	
+	@Test
+	public void testGetButton() {
+		assertEquals(null, normalRoom.getButton());
+		Button b = new Button(exitRoom);
+		normalRoom.setButton(b);
+		assertEquals(b, normalRoom.getButton());
 	}
 
 }

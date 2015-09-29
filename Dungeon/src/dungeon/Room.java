@@ -94,7 +94,7 @@ public abstract class Room {
 		else if(chest != null && button == null)
 			res += "There is a chest.";
 		else if(chest == null && button != null)
-			res += "Theres is a button.";
+			res += "There is a button.";
 		//res += "(infos suppl�mentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
 	}

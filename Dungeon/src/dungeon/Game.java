@@ -159,36 +159,55 @@ public class Game {
 	 * open a chest and if there is a item, add the item to the inventory of the player 
 	 */
 	public void openChest() {
-		Chest chest = player.getRoom().getChest();
-		if(chest == null)
-			System.out.println("There is no chest in this room.");
+		if(player.isInFight())
+			System.out.println("You can't do that during a fight.");
 		else {
-			Item item = chest.open();
-			if(item != null)
-				player.addItem(item);
+			Chest chest = player.getRoom().getChest();
+			if(chest == null)
+				System.out.println("There is no chest in this room.");
+			else {
+				Item item = chest.open();
+				if(item != null)
+					try {
+						player.addItem(item);
+					} catch (ItemDoesNotExist e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
 		}
 	}
 	
 	public void pushButton() {
-		Button button = player.getRoom().getButton();
-		if(button == null)
-			System.out.println("There is no button in this room.");
-		else
-			button.activate();
+		if(player.isInFight())
+			System.out.println("You can't do that during a fight.");
+		else {
+			Button button = player.getRoom().getButton();
+			if(button == null)
+				System.out.println("There is no button in this room.");
+			else
+				button.activate();
+		}
 	}
 	
 	/**
 	 * gives the inventory of the player
 	 */
 	public void inventory() {
-		System.out.println(player.getInventory());
+		if(player.isInFight())
+			System.out.println("You can't do that during a fight.");
+		else
+			System.out.println(player.getInventory());
 	}
 	
 	/**
 	 * gives the description of a player
 	 */
 	public void description() {
-		System.out.println(player.toString());
+		if(player.isInFight())
+			System.out.println("You can't do that during a fight.");
+		else
+			System.out.println(player.toString());
 	}
 	
 	/**
@@ -212,25 +231,29 @@ public class Game {
 			break;
 		// key
 		case "key":
-			if(player.getKeys().size() < 1) 
-				System.out.println("You have no key.");
+			if(player.isInFight())
+				System.out.println("You can't do that during a fight.");
 			else {
-				List<Key> usedKeys = new ArrayList<Key>();
-				Map<String, Room> neighbors = player.getRoom().getNeighbors();
-				for(int i=0; i<player.getKeys().size(); ++i) {
-					for(Entry<String, Room> entry : neighbors.entrySet()) {
-						if(entry.getValue().equals(player.getKeys().get(i).getRoom())) {
-							System.out.println("You use a key to unlock the room to the " + entry.getKey() + ".");
-							entry.getValue().unlock();
-							usedKeys.add(player.getKeys().get(i));
-							break;
+				if(player.getKeys().size() < 1) 
+					System.out.println("You have no key.");
+				else {
+					List<Key> usedKeys = new ArrayList<Key>();
+					Map<String, Room> neighbors = player.getRoom().getNeighbors();
+					for(int i=0; i<player.getKeys().size(); ++i) {
+						for(Entry<String, Room> entry : neighbors.entrySet()) {
+							if(entry.getValue().equals(player.getKeys().get(i).getRoom())) {
+								System.out.println("You use a key to unlock the room to the " + entry.getKey() + ".");
+								entry.getValue().unlock();
+								usedKeys.add(player.getKeys().get(i));
+								break;
+							}
 						}
 					}
+					for(int i=0; i<usedKeys.size(); ++i)
+						player.getKeys().remove(usedKeys.get(i));
+					if(usedKeys.size() < 1)
+						System.out.println("None of your keys can be used here.");
 				}
-				for(int i=0; i<usedKeys.size(); ++i)
-					player.getKeys().remove(usedKeys.get(i));
-				if(usedKeys.size() < 1)
-					System.out.println("None of your keys can be used here.");
 			}
 			break;
 		default: System.out.println("The item \"" + str + "\" does not exist."); break;

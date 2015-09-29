@@ -8,11 +8,13 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import dungeon.ItemDoesNotExist;
 import dungeon.Monster;
 import dungeon.NormalRoom;
 import dungeon.Player;
 import dungeon.Room;
 import objects.Item;
+import objects.Key;
 import objects.Potion;
 import objects.Weapon;
 
@@ -24,7 +26,7 @@ public class CharacterTest {
 	private Potion potion;
 	
 	@Before
-	public void createCharacters() {
+	public void createCharacters() throws ItemDoesNotExist {
 		p1 = new Player(10);
 		normalRoom = new NormalRoom();
 		m1 = new Monster("Slime", 5, 1);
@@ -67,7 +69,7 @@ public class CharacterTest {
 	}
 	
 	@Test
-	public void testGetAttack() {
+	public void testGetAttack() throws ItemDoesNotExist {
 		assertEquals(1, m1.getAttack());
 		assertEquals(1, p1.getAttack());
 		p1.addItem(new Weapon("Excalibur", 50));
@@ -98,6 +100,8 @@ public class CharacterTest {
 		assertFalse(p1.isInFight());
 		normalRoom.setMonster(m1);
 		assertTrue(p1.isInFight());
+		p1.setHealth(0);
+		assertFalse(p1.isInFight());
 	}
 	
 	@Test
@@ -108,14 +112,36 @@ public class CharacterTest {
 	}
 	
 	@Test
-	public void testAddItem() {
-		Item item = new Weapon("Excalibur", 50);
+	public void testAddItem() throws ItemDoesNotExist {
+		Item weapon = new Weapon("Excalibur", 50);
 		Map<String, Item> map = new HashMap<String, Item>();
 		map.put("potion", potion);
-		map.put("weapon", item);
-		p1.addItem(item);
+		map.put("weapon", weapon);
+		p1.addItem(weapon);
 		assertEquals(map, p1.getBag());
+		assertEquals(0, p1.getKeys().size());
+		p1.addItem(new Key("Small key", new NormalRoom()));
+		assertEquals(1, p1.getKeys().size());
+		
+		// Test if the old weapon / potion stay when we add a worse weapon / potion
+		p1.addItem(new Weapon("Wooden sword", 1));
+		assertEquals(weapon, p1.getBag().get("weapon"));
+		p1.addItem(new Potion("potion", 1));
+		assertEquals(potion, p1.getBag().get("potion"));
+		
+		// Test is the old weapon / potion is replaced by a better weapon / potion
+		Item weapon2 = new Weapon("Excalibur 2.0", 100);
+		p1.addItem(weapon2);
+		assertEquals(weapon2, p1.getBag().get("weapon"));
+		Item potion2 = new Potion("potion", 20);
+		p1.addItem(potion2);
+		assertEquals(potion2, p1.getBag().get("potion"));
 	}
+	
+	/*@Test(expected=ItemDoesNotExist.class)
+	public void testAddNonExistingItem() throws ItemDoesNotExist {
+		
+	}*/
 
 	@Test
 	public void testDrinkPotion() {
@@ -127,9 +153,10 @@ public class CharacterTest {
 	}
 	
 	@Test
-	public void TestGetInventory() {
-		assertEquals("Items : Healing potion\nKeys : 0",p1.getInventory());
-		
+	public void testGetInventory() {
+		assertEquals("Items : Healing potion\nKeys : 0", p1.getInventory());
+		Player p2 = new Player(10);
+		assertEquals("Items : none\nKeys : 0", p2.getInventory());
 	}
 	
 	@Test

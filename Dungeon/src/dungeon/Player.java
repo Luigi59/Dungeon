@@ -64,8 +64,9 @@ public class Player extends Character {
 	/**
 	 * add a item into the bag
 	 * @param item 
+	 * @throws ItemDoesNotExist 
 	 */
-	public void addItem(Item item) {
+	public void addItem(Item item) throws ItemDoesNotExist {
 		switch(item.getType()) {
 		// key
 		case "key":
@@ -81,7 +82,8 @@ public class Player extends Character {
 					System.out.println("You have already a similar or better weapon.");
 					System.out.println("You drop the weapon.");
 				}
-			}
+			} else
+				this.bag.put(item.getType(), item);
 			break;
 		//potion
 		case "potion":
@@ -94,11 +96,11 @@ public class Player extends Character {
 					System.out.println("You have already a similar or better potion.");
 					System.out.println("You drop the potion.");
 				}
-			}
+			} else
+				this.bag.put(item.getType(), item);
 			break;
+		default: throw new ItemDoesNotExist();
 		}
-		if(!item.getType().equals("key"))
-			this.bag.put(item.getType(), item);
 	}
 	
 	/**

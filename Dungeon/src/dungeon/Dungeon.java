@@ -23,6 +23,13 @@ public class Dungeon {
 	protected Map<Integer, Room> rooms;
 	
 	/**
+	 * an empty dungeon
+	 */
+	public Dungeon() {
+		rooms = new HashMap<Integer, Room>();
+	}
+	
+	/**
 	 * a dungeon 
 	 * @param n the number of the dungeon
 	 */
@@ -37,7 +44,7 @@ public class Dungeon {
 	 * @return the room
 	 */
 	public Room getRoomWithNumber(int number) {
-		return this.rooms.get(number);
+		return rooms.get(number);
 	}
 	
 	/**
@@ -153,6 +160,10 @@ public class Dungeon {
 		readFile(path);
 		path = "buttons/" + n + ".txt";
 		readFile(path);
+	}
+	
+	public Map<Integer, Room> getMap() {
+		return rooms;
 	}
 	
 	
