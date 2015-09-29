@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import entity.Button;
 import entity.Chest;
 import objects.Item;
 import objects.Key;
@@ -59,6 +60,9 @@ public class Dungeon {
 			} else if(name.startsWith("chests/")) {
 				while((line = br.readLine()) != null)
 					readChestLine(line);
+			} else if(name.startsWith("buttons/")) {
+				while((line = br.readLine()) != null)
+					readButtonLine(line);
 			}
 			br.close();
 		} catch(Exception e) {
@@ -76,12 +80,12 @@ public class Dungeon {
 	public void readDungeonLine(String s) throws MapFileException {
 		String[] tmp = s.split(" ");
 		if(!rooms.containsKey(Integer.parseInt(tmp[0])))
-			addRoomToMap(Integer.parseInt(tmp[0]), tmp[1]);
+			addRoomToMap(Integer.parseInt(tmp[0]), tmp[1], Boolean.parseBoolean(tmp[2]));
 		
-		if(!rooms.containsKey(Integer.parseInt(tmp[3])))
-			addRoomToMap(Integer.parseInt(tmp[3]), tmp[4]);
+		if(!rooms.containsKey(Integer.parseInt(tmp[4])))
+			addRoomToMap(Integer.parseInt(tmp[4]), tmp[5], Boolean.parseBoolean(tmp[6]));
 	
-		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[2], rooms.get(Integer.parseInt(tmp[3])));		
+		rooms.get(Integer.parseInt(tmp[0])).addNeighbor(tmp[3], rooms.get(Integer.parseInt(tmp[4])));		
 	}
 	
 	/**
@@ -114,17 +118,24 @@ public class Dungeon {
 		room.setChest(new Chest(item));
 	}
 	
+	public void readButtonLine(String s) throws ButtonFileException {
+		String[] tmp = s.split(":");
+		Room room = rooms.get(Integer.parseInt(tmp[0]));
+		Room unlock = rooms.get(Integer.parseInt(tmp[1]));
+		room.setButton(new Button(unlock));
+	}
+	
 	/**
 	 * Adds Room to the Map
 	 * @param num the number of the room
 	 * @param type the type of the room
 	 * @throws MapFileException
 	 */
-	public void addRoomToMap(int num, String type) throws MapFileException {
+	public void addRoomToMap(int num, String type, boolean locked) throws MapFileException {
 		switch(type) {
-		case "normal": rooms.put(num, new NormalRoom()); break;
-		case "trap": rooms.put(num, new TrapRoom()); break;
-		case "exit": rooms.put(num, new ExitRoom()); break;
+		case "normal": rooms.put(num, new NormalRoom(locked)); break;
+		case "trap": rooms.put(num, new TrapRoom(locked)); break;
+		case "exit": rooms.put(num, new ExitRoom(locked)); break;
 		default: throw new MapFileException("Error into map's file.\n");
 		}
 	}
@@ -139,6 +150,8 @@ public class Dungeon {
 		path = "monsters/" + n + ".txt";
 		readFile(path);
 		path = "chests/" + n + ".txt";
+		readFile(path);
+		path = "buttons/" + n + ".txt";
 		readFile(path);
 	}
 	

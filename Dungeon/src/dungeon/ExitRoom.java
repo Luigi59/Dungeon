@@ -10,6 +10,10 @@ public class ExitRoom extends Room{
 		super();
 	}
 	
+	public ExitRoom(boolean locked) {
+		super(locked);
+	}
+	
 	@Override
 	public boolean canBeLeft() {
 		return true;

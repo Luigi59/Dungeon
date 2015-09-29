@@ -10,6 +10,10 @@ public class NormalRoom extends Room {
 		super();
 	}
 	
+	public NormalRoom(boolean locked) {
+		super(locked);
+	}
+	
 	@Override
 	public boolean canBeLeft() {
 		return true;

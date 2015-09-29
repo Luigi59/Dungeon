@@ -1,21 +1,21 @@
-1 normal north 2 normal
-2 normal north 3 normal
-2 normal east 4 normal
-2 normal south 1 normal
-3 normal east 6 normal
-3 normal south 2 normal
-4 normal north 5 normal
-4 normal west 2 normal
-4 normal east 10 normal
-5 normal east 8 normal
-5 normal south 4 normal
-6 normal west 3 normal
-6 normal east 7 trap
-7 trap west 6 normal
-8 normal west 5 normal
-8 normal east 9 trap
-8 normal south 10 normal
-9 trap west 8 normal
-10 normal north 8 normal
-10 normal east 11 exit
-11 exit west 10 normal
+1 normal false north 2 normal false
+2 normal false north 3 normal true
+2 normal false east 4 normal false
+2 normal false south 1 normal false
+3 normal true east 6 normal false
+3 normal true south 2 normal false
+4 normal false north 5 normal true
+4 normal false west 2 normal false
+4 normal false east 10 normal false
+5 normal true east 8 normal false
+5 normal true south 4 normal false
+6 normal false west 3 normal true
+6 normal false east 7 trap false
+7 trap false west 6 normal false
+8 normal false west 5 normal true
+8 normal false east 9 trap false
+8 normal false south 10 normal false
+9 trap false west 8 normal false
+10 normal false north 8 normal false
+10 normal false east 11 exit false
+11 exit false west 10 normal false

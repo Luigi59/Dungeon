@@ -10,6 +10,10 @@ public class TrapRoom extends Room {
 		super();
 	}
 	
+	public TrapRoom(boolean locked) {
+		super(locked);
+	}
+	
 	@Override
 	public boolean canBeLeft() {
 		return false;

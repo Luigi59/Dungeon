@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import entity.Button;
 import entity.Chest;
 import objects.Item;
 import objects.Key;
@@ -88,6 +89,8 @@ public class Game {
 			fight();
 		else if(command.equals("open chest"))
 			openChest();
+		else if(command.equals("push button"))
+			pushButton();
 		else if(command.equals("inventory"))
 			inventory();
 		else if(command.equals("description"))
@@ -112,14 +115,18 @@ public class Game {
 		for (Direction d : Direction.values()) {
 			if (d.toString().equals(direction)) {
 				if (currentRoom.getNeighbors().containsKey(direction) && currentRoom.getMonster() == null) {
-					this.player.setRoom(currentRoom.getNeighbor(direction));
-					System.out.println("You go " + direction + ".");
-					if(player.getRoom().getClass() == TrapRoom.class) {
-						System.out.println("Ouch ! You lost 2 health points.");
-						player.setHealth(player.getHealth() - 2);
+					if(currentRoom.getNeighbor(direction).isLocked())
+						System.out.println("Can't go " + direction + ", the room is locked.");
+					else {
+						this.player.setRoom(currentRoom.getNeighbor(direction));
+						System.out.println("You go " + direction + ".");
+						if(player.getRoom().getClass() == TrapRoom.class) {
+							System.out.println("Ouch ! You lost 2 health points.");
+							player.setHealth(player.getHealth() - 2);
+						}
+						if(player.getRoom().getMonster() != null)
+							System.out.println(player.getRoom().getMonster().getName() + " is guarding the room.");
 					}
-					if(player.getRoom().getMonster() != null)
-						System.out.println(player.getRoom().getMonster().getName() + " is guarding the room.");
 				}
 				else {
 					System.out.println("Can't go "+ direction + "!");
@@ -160,6 +167,14 @@ public class Game {
 			if(item != null)
 				player.addItem(item);
 		}
+	}
+	
+	public void pushButton() {
+		Button button = player.getRoom().getButton();
+		if(button == null)
+			System.out.println("There is no button in this room.");
+		else
+			button.activate();
 	}
 	
 	/**

@@ -19,8 +19,12 @@ public abstract class Room {
 	 * If no parameter, by default a room is not locked and has no monster.
 	 */
 	public Room() {
+		this(false);
+	}
+	
+	public Room(boolean locked) {
 		this.neighbors = new HashMap<String,Room>();
-		this.locked = false;
+		this.locked = locked;
 		this.monster = null;
 		this.chest = null;
 		this.button = null;

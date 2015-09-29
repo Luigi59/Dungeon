@@ -67,6 +67,9 @@ public class Player extends Character {
 	 */
 	public void addItem(Item item) {
 		switch(item.getType()) {
+		// key
+		case "key":
+			keys.add((Key) item); break;
 		// weapon
 		case "weapon":
 			if(bag.containsKey("weapon")) {
@@ -94,7 +97,8 @@ public class Player extends Character {
 			}
 			break;
 		}
-		this.bag.put(item.getType(), item);
+		if(!item.getType().equals("key"))
+			this.bag.put(item.getType(), item);
 	}
 	
 	/**
@@ -129,6 +133,7 @@ public class Player extends Character {
 			health = maxHealth;
 		tmp = health - tmp;
 		System.out.println("You drink " + potion.getName() + " and restore " + tmp + " health points.");
+		System.out.println("You have now " + health + "/" + maxHealth + " HP.");
 		getBag().remove("potion");
 	}
 	
@@ -155,7 +160,7 @@ public class Player extends Character {
 	 * @return the information of the player
 	 */
 	public String toString() {
-		return "You have " + health + "/" + maxHealth + " HP and " + attack + " ATK.";
+		return "You have " + health + "/" + maxHealth + " HP and " + getAttack() + " ATK.";
 	}
 	
 }
