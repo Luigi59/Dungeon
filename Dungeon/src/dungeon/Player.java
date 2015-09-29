@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import objects.Item;
 import objects.Key;
@@ -62,6 +63,34 @@ public class Player extends Character {
 	 * @param item 
 	 */
 	public void addItem(Item item) {
+		switch(item.getType()) {
+		// weapon
+		case "weapon":
+			if(bag.containsKey("weapon")) {
+				Weapon oldWeapon = (Weapon) bag.get("weapon");
+				Weapon newWeapon = (Weapon) item;
+				if(newWeapon.getDamage() > oldWeapon.getDamage())
+					this.bag.put(item.getType(), item);
+				else {
+					System.out.println("You have already a similar or better weapon.");
+					System.out.println("You drop the weapon.");
+				}
+			}
+			break;
+		//potion
+		case "potion":
+			if(bag.containsKey("potion")) {
+				Potion oldPotion = (Potion) bag.get("potion");
+				Potion newPotion = (Potion) item;
+				if(newPotion.getHpWin() > oldPotion.getHpWin())
+					this.bag.put(item.getType(), item);
+				else {
+					System.out.println("You have already a similar or better potion.");
+					System.out.println("You drop the potion.");
+				}
+			}
+			break;
+		}
 		this.bag.put(item.getType(), item);
 	}
 	
@@ -86,6 +115,20 @@ public class Player extends Character {
 		tmp = health - tmp;
 		System.out.println("You drink " + potion.getName() + " and restore " + tmp + "health points.");
 		getBag().remove("potion");
+	}
+	
+	public String getInventory() {
+		String res = "";
+		res += "Items : ";
+		if(bag.size() < 1)
+			res += "none\n";
+		else {
+			for(Entry<String, Item> entry : bag.entrySet())
+				res += entry.getValue().getName() + ", ";
+			res = res.substring(0, res.length()-2) + "\n";
+		}
+		res += "Keys : " + keys.size();
+		return res;
 	}
 	
 	public String toString() {

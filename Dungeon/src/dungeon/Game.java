@@ -83,6 +83,10 @@ public class Game {
 			fight();
 		else if(command.equals("open chest"))
 			openChest();
+		else if(command.equals("inventory"))
+			inventory();
+		else if(command.equals("description"))
+			description();
 		else if(command.startsWith("use "))
 				useItem(command.substring(4));
 		else if (command.startsWith("go ")) {
@@ -145,6 +149,14 @@ public class Game {
 			if(item != null)
 				player.addItem(item);
 		}
+	}
+	
+	public void inventory() {
+		System.out.println(player.getInventory());
+	}
+	
+	public void description() {
+		System.out.println(player.toString());
 	}
 	
 	public void useItem(String str) {
