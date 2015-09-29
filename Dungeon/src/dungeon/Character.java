@@ -5,7 +5,7 @@ public class Character {
 	protected int health;
 	protected int maxHealth;
 	protected int attack;
-	
+	 
 	/**
 	 * a character
 	 * @param health the number of health points
