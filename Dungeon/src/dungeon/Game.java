@@ -1,5 +1,15 @@
 package dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import entity.Chest;
+import objects.Item;
+import objects.Key;
+import objects.Potion;
+
 public class Game {
 
 	private Player player;
@@ -71,6 +81,8 @@ public class Game {
 		
 		if(command.equals("fight"))
 			fight();
+		else if(command.equals("open chest"))
+			openChest();
 		else if(command.startsWith("use "))
 				useItem(command.substring(4));
 		else if (command.startsWith("go ")) {
@@ -124,8 +136,57 @@ public class Game {
 		}
 	}
 	
+	public void openChest() {
+		Chest chest = player.getRoom().getChest();
+		if(chest == null)
+			System.out.println("There is no chest in this room.");
+		else {
+			Item item = chest.open();
+			if(item != null)
+				player.addItem(item);
+		}
+	}
+	
 	public void useItem(String str) {
-		
+		switch(str) {
+		// potion
+		case "potion":
+			if(!player.getBag().containsKey("potion") || player.getBag().get("potion") == null)
+				System.out.println("You have no potion.");
+			else {
+				if(player.getHealth() == player.getMaxHealth())
+					System.out.println("Your health points are already to the maximum.");
+				else {
+					Potion p = (Potion) player.getBag().get("potion");
+					player.drinkPotion(p);
+				}
+			}
+			break;
+		// key
+		case "key":
+			if(player.getKeys().size() < 1) 
+				System.out.println("You have no key.");
+			else {
+				List<Key> usedKeys = new ArrayList<Key>();
+				Map<String, Room> neighbors = player.getRoom().getNeighbors();
+				for(int i=0; i<player.getKeys().size(); ++i) {
+					for(Entry<String, Room> entry : neighbors.entrySet()) {
+						if(entry.getValue().equals(player.getKeys().get(i).getRoom())) {
+							System.out.println("You use a key to unlock the room to the " + entry.getKey() + ".");
+							entry.getValue().unlock();
+							usedKeys.add(player.getKeys().get(i));
+							break;
+						}
+					}
+				}
+				for(int i=0; i<usedKeys.size(); ++i)
+					player.getKeys().remove(usedKeys.get(i));
+				if(usedKeys.size() < 1)
+					System.out.println("None of your keys can be used here.");
+			}
+			break;
+		default: System.out.println("The item \"" + str + "\" does not exist."); break;
+		}
 	}
 	
 	/**

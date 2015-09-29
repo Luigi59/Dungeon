@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import entity.Chest;
 import objects.Item;
 import objects.Key;
 import objects.Potion;
@@ -46,6 +47,9 @@ public class Dungeon {
 			} else if(name.startsWith("monsters/")) {
 				while((line = br.readLine()) != null)
 					readMonsterLine(line);
+			} else if(name.startsWith("chests/")) {
+				while((line = br.readLine()) != null)
+					readChestLine(line);
 			}
 			br.close();
 		} catch(Exception e) {
@@ -72,12 +76,13 @@ public class Dungeon {
 	}
 	
 	public void readMonsterLine(String s) throws MonsterFileException {
-		String[] tmp = s.split(".");
+		String[] tmp = s.split(":");
+		//System.out.println(tmp[0]);
 		rooms.get(Integer.parseInt(tmp[0])).setMonster(new Monster(tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3])));
 	}
 	
 	public void readChestLine(String s) throws ChestFileException {
-		String[] tmp = s.split(".");
+		String[] tmp = s.split(":");
 		Room room = rooms.get(Integer.parseInt(tmp[0]));
 		Item item;
 		switch(tmp[1]) {
@@ -86,6 +91,7 @@ public class Dungeon {
 		case "key": item = new Key(tmp[2], rooms.get(Integer.parseInt(tmp[3]))); break;
 		default: throw new ChestFileException("Item of type " + tmp[1] + " doesn't exists.");
 		}
+		room.setChest(new Chest(item));
 	}
 	
 	/**
@@ -107,6 +113,8 @@ public class Dungeon {
 		String path = "dungeons/" + n + ".txt";
 		readFile(path);
 		path = "monsters/" + n + ".txt";
+		readFile(path);
+		path = "chests/" + n + ".txt";
 		readFile(path);
 	}
 	

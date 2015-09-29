@@ -1,16 +1,21 @@
 package dungeon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import objects.Item;
+import objects.Key;
+import objects.Potion;
 import objects.Weapon;
 
 /** A player in the game Dungeon */
 public class Player extends Character {
 
-	private Room currentRoom;
-	private Map<String,Item> bag;
+	protected Room currentRoom;
+	protected Map<String,Item> bag;
+	protected List<Key> keys;
 	
 	/**
 	 * 
@@ -21,6 +26,7 @@ public class Player extends Character {
 		super(health, 1);
 		this.currentRoom = null;
 		this.bag = new HashMap<String,Item>();
+		keys = new ArrayList<Key>();
 	}
 	
 	/**
@@ -66,6 +72,20 @@ public class Player extends Character {
 			res += w.getDamage();
 		}
 		return res;
+	}
+	
+	public List<Key> getKeys() {
+		return keys;
+	}
+	
+	public void drinkPotion(Potion potion) {
+		int tmp = health;
+		health += potion.getHpWin();
+		if(health > maxHealth)
+			health = maxHealth;
+		tmp = health - tmp;
+		System.out.println("You drink " + potion.getName() + " and restore " + tmp + "health points.");
+		getBag().remove("potion");
 	}
 	
 	public String toString() {

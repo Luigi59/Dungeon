@@ -19,4 +19,8 @@ public class Key extends Item {
 		return "key";
 	}
 	
+	public Room getRoom() {
+		return room;
+	}
+	
 }

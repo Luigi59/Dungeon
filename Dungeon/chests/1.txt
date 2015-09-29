@@ -1,1 +1,1 @@
-1.weapon.Wooden sword.1 
+1:weapon:Wooden sword:1

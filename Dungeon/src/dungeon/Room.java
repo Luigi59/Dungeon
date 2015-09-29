@@ -79,7 +79,13 @@ public abstract class Room {
 		else
 			for(Entry<String, Room> entry : neighbors.entrySet())
 				res += entry.getKey() +", ";
-		res = res.substring(0, res.length()-2) + ".";
+		res = res.substring(0, res.length()-2) + ".\n";
+		if(chest != null && button != null)
+			res += "There is a chest and a button.";
+		else if(chest != null && button == null)
+			res += "There is a chest.";
+		else if(chest == null && button != null)
+			res += "Theres is a button.";
 		//res += "(infos supplémentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
 	}
