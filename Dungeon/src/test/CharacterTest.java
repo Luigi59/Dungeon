@@ -12,9 +12,9 @@ import dungeon.Monster;
 import dungeon.NormalRoom;
 import dungeon.Player;
 import dungeon.Room;
-import dungeon.objects.Item;
-import dungeon.objects.Potion;
-import dungeon.objects.Weapon;
+import objects.Item;
+import objects.Potion;
+import objects.Weapon;
 
 public class CharacterTest {
 	

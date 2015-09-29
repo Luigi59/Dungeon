@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import objects.Item;
+import objects.Key;
+import objects.Potion;
+import objects.Weapon;
+
 public class Dungeon {
 
 	
@@ -67,8 +72,20 @@ public class Dungeon {
 	}
 	
 	public void readMonsterLine(String s) throws MonsterFileException {
-		String[] tmp = s.split(" ");
+		String[] tmp = s.split(".");
 		rooms.get(Integer.parseInt(tmp[0])).setMonster(new Monster(tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3])));
+	}
+	
+	public void readChestLine(String s) throws ChestFileException {
+		String[] tmp = s.split(".");
+		Room room = rooms.get(Integer.parseInt(tmp[0]));
+		Item item;
+		switch(tmp[1]) {
+		case "weapon": item = new Weapon(tmp[2], Integer.parseInt(tmp[3])); break;
+		case "potion": item = new Potion(tmp[2], Integer.parseInt(tmp[3])); break;
+		case "key": item = new Key(tmp[2], rooms.get(Integer.parseInt(tmp[3]))); break;
+		default: throw new ChestFileException("Item of type " + tmp[1] + " doesn't exists.");
+		}
 	}
 	
 	/**

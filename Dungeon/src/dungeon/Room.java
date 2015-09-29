@@ -4,44 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import entity.Button;
+import entity.Chest;
+
 public abstract class Room {
 
 	protected Map<String,Room> neighbors;
 	protected boolean locked;
 	protected Monster monster;
+	protected Chest chest;
+	protected Button button;
 	
 	/**
 	 * If no parameter, by default a room is not locked and has no monster.
 	 */
 	public Room() {
-		this(false, null);
-	}
-	
-	/**
-	 * Room locked or not, with no monster
-	 * @param locked
-	 */
-	public Room(boolean locked) {
-		this(locked, null);
-	}
-	
-	/**
-	 * Room with a monster
-	 * @param monster
-	 */
-	public Room(Monster monster) {
-		this(false, monster);
-	}
-	
-	/**
-	 * Room locked or not, with a monster
-	 * @param locked
-	 * @param monster
-	 */
-	public Room(boolean locked, Monster monster) {
 		this.neighbors = new HashMap<String,Room>();
-		this.locked = locked;
-		this.monster = monster;
+		this.locked = false;
+		this.monster = null;
+		this.chest = null;
+		this.button = null;
 	}
 	
 	/**
@@ -138,6 +120,38 @@ public abstract class Room {
 	 */
 	public void setMonster(Monster monster) {
 		this.monster = monster;
+	}
+	
+	/**
+	 * Get the chest of the room, or null if there is none.
+	 * @return
+	 */
+	public Chest getChest() {
+		return chest;
+	}
+	
+	/**
+	 * Set the chest of the room.
+	 * @param chest
+	 */
+	public void setChest(Chest chest) {
+		this.chest = chest;
+	}
+	
+	/**
+	 * Get the button of the room, or null if there is none.
+	 * @return
+	 */
+	public Button getButton() {
+		return button;
+	}
+	
+	/**
+	 * Set the button of the room.
+	 * @param button
+	 */
+	public void setButton(Button button) {
+		this.button = button;
 	}
 	
 }

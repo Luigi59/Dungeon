@@ -1,4 +1,4 @@
-package dungeon.objects;
+package objects;
 
 public class Potion extends Item {
 

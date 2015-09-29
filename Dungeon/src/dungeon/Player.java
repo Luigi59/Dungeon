@@ -3,8 +3,8 @@ package dungeon;
 import java.util.HashMap;
 import java.util.Map;
 
-import dungeon.objects.Item;
-import dungeon.objects.Weapon;
+import objects.Item;
+import objects.Weapon;
 
 /** A player in the game Dungeon */
 public class Player extends Character {
