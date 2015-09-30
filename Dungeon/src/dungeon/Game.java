@@ -268,7 +268,7 @@ public class Game {
 		String s = "Welcome in the Dungeon!\n"
 				+ "The rules are simple, you have to progress in the dungeon to find the exit.\n"
 				+ "The commands for the direction are : go north, go south, go east and go west.\n"
-				+ "The other commands are : open chest, fight, use (+the name of the item), description and inventory.\n"
+				+ "The other commands are : open chest, fight, use (+the name of the item), push button, description and inventory.\n"
 				+ "----------------------------------------------------------------------------------------------";
 		return s;
 				
