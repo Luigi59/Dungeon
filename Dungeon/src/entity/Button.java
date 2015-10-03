@@ -8,7 +8,7 @@ public class Button {
 	
 	/**
 	 * A button unlocks a room (given in parameter) in the dungeon
-	 * @param linkedRoom
+	 * @param linkedRoom the room that the button unlocks
 	 */
 	public Button(Room linkedRoom) {
 		this.linkedRoom = linkedRoom;

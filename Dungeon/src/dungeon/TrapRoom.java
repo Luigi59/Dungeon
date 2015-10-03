@@ -10,6 +10,10 @@ public class TrapRoom extends Room {
 		super();
 	}
 	
+	/**
+	 * A trap Room
+	 * @param locked true if the room is locked false if not
+	 */
 	public TrapRoom(boolean locked) {
 		super(locked);
 	}

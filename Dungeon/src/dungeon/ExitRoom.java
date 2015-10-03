@@ -10,6 +10,10 @@ public class ExitRoom extends Room{
 		super();
 	}
 	
+	/**
+	 * A exit room
+	 * @param locked true if the room is locked false if not
+	 */
 	public ExitRoom(boolean locked) {
 		super(locked);
 	}

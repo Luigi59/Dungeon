@@ -10,6 +10,10 @@ public class NormalRoom extends Room {
 		super();
 	}
 	
+	/**
+	 * A normal room
+	 * @param locked true if the room is locked false if not
+	 */
 	public NormalRoom(boolean locked) {
 		super(locked);
 	}

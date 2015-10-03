@@ -19,8 +19,7 @@ public class Player extends Character {
 	
 	/**
 	 * a player
-	 * @param name the name of the player
-	 * @param HP the number of health points of the player
+	 * @param health the number of health points of the player
 	 */
 	public Player(int health) {
 		super(health, 1);
@@ -63,8 +62,8 @@ public class Player extends Character {
 	
 	/**
 	 * add a item into the bag
-	 * @param item 
-	 * @throws ItemDoesNotExist 
+	 * @param item to add to the bag
+	 * @throws ItemDoesNotExist if the item doesn't exist
 	 */
 	public void addItem(Item item) throws ItemDoesNotExist {
 		switch(item.getType()) {
@@ -126,7 +125,7 @@ public class Player extends Character {
 	
 	/**
 	 * the player drink a potion
-	 * @param potion 
+	 * @param potion to drink
 	 */
 	public void drinkPotion(Potion potion) {
 		int tmp = health;

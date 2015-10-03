@@ -8,7 +8,7 @@ public class Chest {
 	
 	/**
 	 * a chest with a item inside
-	 * @param item
+	 * @param item of the chest
 	 */
 	public Chest(Item item) {
 		this.item = item;

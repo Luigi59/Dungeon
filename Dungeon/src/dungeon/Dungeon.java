@@ -49,7 +49,7 @@ public class Dungeon {
 	
 	/**
 	 * Reads the file given in parameter.<br>
-	 * For each line, call the {@link Dungeon#readLine(String)} method.
+	 * For each line, call the readLine(String) method.
 	 * @param name the name of the file
 	 */
 	public void readFile(String name) {
@@ -79,10 +79,10 @@ public class Dungeon {
 	
 	/**
 	 * Reads the current line of the file.<br>
-	 * Adds Room(s) to the Map<Integer, Room> if it does not exists already.<br>
+	 * Adds Room(s) to the Map(Integer, Room) if it does not exists already.<br>
 	 * Add the corresponding neighbor to the room given in the line informations.
 	 * @param s - String
-	 * @throws MapFileException
+	 * @throws MapFileException if there are no rooms
 	 */
 	public void readDungeonLine(String s) throws MapFileException {
 		String[] tmp = s.split(" ");
@@ -98,8 +98,8 @@ public class Dungeon {
 	/**
 	 * Reads the current line of the file.<br>
 	 * Add Monster to a room
-	 * @param s
-	 * @throws MonsterFileException
+	 * @param s the line of the file
+	 * @throws MonsterFileException if there is no monster
 	 */
 	public void readMonsterLine(String s) throws MonsterFileException {
 		String[] tmp = s.split(":");
@@ -109,8 +109,8 @@ public class Dungeon {
 	/**
 	 * Read the current line of the file.<br>
 	 * Add Chest to a room
-	 * @param s
-	 * @throws ChestFileException
+	 * @param s the line of the file
+	 * @throws ChestFileException of there is no chest
 	 */
 	public void readChestLine(String s) throws ChestFileException {
 		String[] tmp = s.split(":");
@@ -136,7 +136,8 @@ public class Dungeon {
 	 * Adds Room to the Map
 	 * @param num the number of the room
 	 * @param type the type of the room
-	 * @throws MapFileException
+	 * @param locked tells if the room is locked
+	 * @throws MapFileException if there are no rooms 
 	 */
 	public void addRoomToMap(int num, String type, boolean locked) throws MapFileException {
 		switch(type) {
@@ -162,6 +163,10 @@ public class Dungeon {
 		readFile(path);
 	}
 	
+	/**
+	 * return all the rooms of the dungeon
+	 * @return all the rooms
+	 */
 	public Map<Integer, Room> getMap() {
 		return rooms;
 	}

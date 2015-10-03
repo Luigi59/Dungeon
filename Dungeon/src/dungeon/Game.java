@@ -19,7 +19,7 @@ public class Game {
 	
 	/**
 	 * a game 
-	 * @param dungeon 
+	 * @param dungeon the dungeon
 	 * @param player the player who are in the dungeon
 	 */
 	public Game(Dungeon dungeon, Player player) {
@@ -178,6 +178,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * push a button
+	 */
 	public void pushButton() {
 		if(player.isInFight())
 			System.out.println("You can't do that during a fight.");

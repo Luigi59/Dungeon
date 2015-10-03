@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dungeon.NormalRoom;
-import dungeon.Room;
 import entity.Chest;
 import objects.Item;
 import objects.Key;

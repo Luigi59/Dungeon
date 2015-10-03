@@ -14,7 +14,6 @@ import dungeon.Dungeon;
 import dungeon.MapFileException;
 import dungeon.Monster;
 import dungeon.MonsterFileException;
-import dungeon.NormalRoom;
 import dungeon.Room;
 import entity.Button;
 import entity.Chest;

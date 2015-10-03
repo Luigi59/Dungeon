@@ -22,6 +22,10 @@ public abstract class Room {
 		this(false);
 	}
 	
+	/**
+	 * a room
+	 * @param locked true if the room is locked false if not
+	 */
 	public Room(boolean locked) {
 		this.neighbors = new HashMap<String,Room>();
 		this.locked = locked;
@@ -41,9 +45,9 @@ public abstract class Room {
 	
 	/**
 	 * gives the room with its associated direction
-	 * @param direction 
+	 * @param direction the direction
 	 * @return the room with its direction
-	 * @exception NullPointerException
+	 * @exception NullPointerException if there aren't neighbor
 	 */
 	public Room getNeighbor(String direction) throws NullPointerException {
 		if (this.neighbors.containsKey(direction)) {
@@ -95,7 +99,6 @@ public abstract class Room {
 			res += "There is a chest.";
 		else if(chest == null && button != null)
 			res += "There is a button.";
-		//res += "(infos suppl�mentaires : directions possibles, boutons, monstres, coffres, peintures, tapis, etc...)";
 		return res;
 	}
 	
@@ -123,7 +126,7 @@ public abstract class Room {
 	
 	/**
 	 * Get the monster of the room, or null if there is none.
-	 * @return Monster
+	 * @return Monster of the room
 	 */
 	public Monster getMonster() {
 		return monster;
@@ -131,7 +134,7 @@ public abstract class Room {
 	
 	/**
 	 * Set the monster of the room.
-	 * @param monster
+	 * @param monster to add
 	 */
 	public void setMonster(Monster monster) {
 		this.monster = monster;
@@ -139,7 +142,7 @@ public abstract class Room {
 	
 	/**
 	 * Get the chest of the room, or null if there is none.
-	 * @return chest
+	 * @return chest of the room
 	 */
 	public Chest getChest() {
 		return chest;
@@ -147,7 +150,7 @@ public abstract class Room {
 	
 	/**
 	 * Set the chest of the room.
-	 * @param chest
+	 * @param chest to add
 	 */
 	public void setChest(Chest chest) {
 		this.chest = chest;
@@ -155,7 +158,7 @@ public abstract class Room {
 	
 	/**
 	 * Get the button of the room, or null if there is none.
-	 * @return button
+	 * @return button of the room
 	 */
 	public Button getButton() {
 		return button;
@@ -163,7 +166,7 @@ public abstract class Room {
 	
 	/**
 	 * Set the button of the room.
-	 * @param button
+	 * @param button to add
 	 */
 	public void setButton(Button button) {
 		this.button = button;
