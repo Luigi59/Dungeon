@@ -1,0 +1,5 @@
+3:weapon:Wooden sword:1
+6:key:Small key:4
+7:potion:Great healing potion:10
+11:weapon:Stone sword:3
+13:key:Strange key:14

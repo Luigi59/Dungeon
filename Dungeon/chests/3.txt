@@ -1,0 +1,3 @@
+3:weapon:axe:2
+5:potion:Little healing potion:6
+6:key:A little key:8
